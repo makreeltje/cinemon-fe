@@ -1,3 +1,4 @@
+### SvelteKit ###
 .DS_Store
 node_modules
 /build
@@ -6,17 +7,6 @@ node_modules
 .env
 .env.*
 !.env.example
-.vercel
-.output
-# Created by https://www.toptal.com/developers/gitignore/api/svelte,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=svelte,visualstudiocode
-
-### Svelte ###
-# gitignore template for the SvelteKit, frontend web component framework
-# website: https://kit.svelte.dev/
-
-.svelte-kit/
-package
 
 ### VisualStudioCode ###
 .vscode/*
@@ -43,4 +33,4 @@ package
 # Ignore code-workspaces
 *.code-workspace
 
-# End of https://www.toptal.com/developers/gitignore/api/svelte,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode

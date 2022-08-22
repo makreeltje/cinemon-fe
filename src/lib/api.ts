@@ -1,50 +1,51 @@
-async function sendRequest(method:string, path:string, data:any = {}):Promise<RequestResult> {
-    const backendUrl = 'http://127.0.0.1:8080/cinemon/api/v1';
+async function send(method:string, path:string, data?:any):Promise<RequestResult> {
+    const base = 'http://127.0.0.1:8080/cinemon/api/v1';
 
     const options:RequestInit = {
         method: method,
         headers: {
             'Content-Type': 'application/json',
         },
-        mode: 'cors',
-        cache: 'default',
+        // mode: 'no-cors',
+        // cache: 'default',
     }
+
 	if(data) {
 		options.body = JSON.stringify(data);
 	}
 
-    const result = await fetch(`${backendUrl}/${path}`, options)
-    
-    if (result.status >= 300){
+	const response = await fetch(`${base}/${path}`, options);
+		
+    if (response.status >= 300){
         return {
-            data: await result.text(), 
-            succes: false
+            data: await response.text(), 
+            success: false
         }
     } else {
         return {
-            data: await result.json(), 
-            succes: true
+            data: await response.json(), 
+            success: true,
         }
     }
 }
 
 export interface RequestResult {
     data:string,
-    succes:boolean
+    success:boolean
 }
 
 export function get(path:string) {
-    return sendRequest("GET", path);
+    return send('GET', path);
 }
 
 export function update(path:string, data:any) {
-    return sendRequest("PUT", path, data);
+    return send('PUT', path, data);
 }
 
 export function remove(path:string) {
-    return sendRequest("PUT", path);
+    return send('DELETE', path);
 }
 
 export function create(path:string, data:any) {
-    return sendRequest("PUT", path, data);
+    return send('POST', path, data);
 }

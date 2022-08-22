@@ -22,7 +22,7 @@
 		use:enhance={{
 			result: async ({ form }) => {
 				form.reset();
-			}
+			},
 		}}
 	>
 		<input name="text" aria-label="Add todo" placeholder="+ tap to add a todo" />
@@ -41,7 +41,7 @@
 				use:enhance={{
 					pending: ({ data }) => {
 						todo.done = !!data.get('done');
-					}
+					},
 				}}
 			>
 				<input type="hidden" name="uid" value={todo.uid} />
@@ -59,7 +59,7 @@
 				action="/todos?_method=DELETE"
 				method="post"
 				use:enhance={{
-					pending: () => (todo.pending_delete = true)
+					pending: () => (todo.pending_delete = true),
 				}}
 			>
 				<input type="hidden" name="uid" value={todo.uid} />

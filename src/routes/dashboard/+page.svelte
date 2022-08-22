@@ -1,60 +1,43 @@
 <script lang="ts">
-    import * as api from '$lib/api';
-    let selected:any;
+	import type { PlexServer } from '$models/plex-server.model';
+	import * as api from '$lib/api';
 
-    async function getPlexServers() {
+	export let data: any;
+
+	console.log(data);
+
+	let servers: any;
+
+	async function handleSubmit(): Promise<PlexServer> {
 		const response = await api.get('plex/servers');
 
-        return {
-            servers: response.data,
-        }
+		return response.data;
 	}
 
-    let promise = {};
-
-    function handleClick() {
-        promise = getPlexServers();
-    }
+	let selected: any;
 </script>
-
-
 
 <h1>Plex servers</h1>
 
-<button on:click={handleClick}>Get Plex servers</button>
+<ul>
+	<!-- {#each data.servers as server}
+		<h3>{server.name}</h3>
+		<li>{server.host}</li>
+		<li>{server.address}</li>
+		<li>{server.port}</li>
+		<li>{server.machineIdentifier}</li>
+		<li>{server.version}</li>
+	{/each} -->
+</ul>
 
-{#await promise}
-    <p>...waiting</p>
-{:then data}
-<pre>
-    {JSON.stringify(data)}
-</pre>
-    <!-- <form>
-        <select bind:value={selected}>
-            {#each data.data as server}
-                <option value={server}>
-                    {server.name} ({server.address})
-                </option>
-            {/each}
-        </select>
-        <p>{selected}</p>
-    </form> -->
-{:catch error}
-	<p style="color: red">{error}</p>
-{/await}
+<form on:submit={handleSubmit}>
+	<!-- <select bind:value={selected}>
+		{#each data.servers as server}
+			<option value={server}>
+				{server.name} ({server.address})
+			</option>
+		{/each}
+	</select> -->
 
-<!-- {:else}
-    <form on:submit={getPlexServers}>
-        <select bind:value={selected}>
-            {#each data.data as server}
-                <option value={server}>
-                    {server.name} ({server.address})
-                </option>
-            {/each}
-        </select>
-        <p>{selected}</p>
-
-        <button type=submit>Get Plex servers</button>
-    </form>
-{/if} -->
-
+	<button type="submit"> Submit </button>
+</form>

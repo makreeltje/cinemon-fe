@@ -18,13 +18,13 @@ export const load: PageServerLoad = async ({ locals }) => {
 		// user hasn't created a todo list.
 		// start with an empty array
 		return {
-			todos: [] as Todo[]
+			todos: [] as Todo[],
 		};
 	}
 
 	if (response.status === 200) {
 		return {
-			todos: (await response.json()) as Todo[]
+			todos: (await response.json()) as Todo[],
 		};
 	}
 
@@ -35,7 +35,7 @@ export const POST: Action = async ({ request, locals }) => {
 	const form = await request.formData();
 
 	await api('POST', `todos/${locals.userid}`, {
-		text: form.get('text')
+		text: form.get('text'),
 	});
 };
 
@@ -44,7 +44,7 @@ export const PATCH: Action = async ({ request, locals }) => {
 
 	await api('PATCH', `todos/${locals.userid}/${form.get('uid')}`, {
 		text: form.has('text') ? form.get('text') : undefined,
-		done: form.has('done') ? !!form.get('done') : undefined
+		done: form.has('done') ? !!form.get('done') : undefined,
 	});
 };
 

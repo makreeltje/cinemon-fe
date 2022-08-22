@@ -1,8 +1,9 @@
 import * as api from '$lib/api';
 
-export async function load() {
-    const response =  await api.get('plex/servers');
-    return {
-        servers: response.data,
-    }
-}
+// export async function load() {
+// 	const response = await api.get('plex/servers');
+// 	console.log(response);
+// 	return {
+// 		servers: response.data,
+// 	};
+// }
